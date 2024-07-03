@@ -3,7 +3,7 @@
 public class Auction
 {
     public Guid Id { get; set; }
-    public int ReservedPrice { get; set; }
+    public int ReservePrice { get; set; }
     public string Seller { get; set; }
     public string Winner { get; set; }
     public int? SoldAmount { get; set; }
