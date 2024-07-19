@@ -1,6 +1,5 @@
 ﻿using Contracts;
 using MassTransit;
-using System;
 
 namespace AuctionService.Consumers
 {
