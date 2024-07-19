@@ -91,8 +91,6 @@ namespace AuctionService.Controllers
             auction.Item.Mileage = auctionDto.Mileage != 0 ? auctionDto.Mileage : auction.Item.Mileage;
             auction.Item.ImageUrl = auctionDto.ImageUrl ?? auction.Item.ImageUrl;
 
-            await _publishEndpoint.Publish(_mapper.Map<AuctionUpdated>(auction));
-
             var result = await _context.SaveChangesAsync() > 0;
 
             if (result) return Ok();
@@ -110,9 +108,6 @@ namespace AuctionService.Controllers
             // Todo: Check seller
 
             _context.Auctions.Remove(auction);
-
-            await _publishEndpoint.Publish<AuctionDeleted>(new { Id = auction.Id.ToString() });
-
             var result = await _context.SaveChangesAsync() > 0;
 
             if (!result) return BadRequest("Problem deleting auction");
