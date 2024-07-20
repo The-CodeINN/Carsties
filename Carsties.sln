@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionService", "src\Aucti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchService", "src\SearchService\SearchService.csproj", "{EA763871-54E8-4EC2-AE8E-69EDC0AA9303}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "src\Contracts\Contracts.csproj", "{DE1B0552-BA68-4DB1-898A-A6162D43825A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "src\Contracts\Contracts.csproj", "{DE1B0552-BA68-4DB1-898A-A6162D43825A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "src\IdentityService\IdentityService.csproj", "{7B763765-99D8-428D-99F1-E78941847BE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService", "src\IdentityService\IdentityService.csproj", "{7B763765-99D8-428D-99F1-E78941847BE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
