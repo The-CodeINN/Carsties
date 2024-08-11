@@ -1,23 +1,16 @@
 using AuctionService.Consumers;
 using AuctionService.Data;
-using dotenv.net;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var root = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\.."));
-var dotenv = Path.Combine(root, ".env");
-DotEnv.Load(options: new DotEnvOptions(envFilePaths: [dotenv]));
-
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AuctionDbContext>(opt =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-        .Replace("[PostgresPassword]", Environment.GetEnvironmentVariable("POSTGRES_PASSWORD"));
-    opt.UseNpgsql(connectionString);
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMassTransit(x =>
@@ -35,6 +28,11 @@ builder.Services.AddMassTransit(x =>
 
     x.UsingRabbitMq((context, cfg) =>
     {
+        cfg.Host(builder.Configuration["RabbitMq:Host"], "/", host =>
+        {
+            host.Username(builder.Configuration.GetValue("RabbitMq:Username", "guest"));
+            host.Password(builder.Configuration.GetValue("RabbitMq:Password", "guest"));
+        });
         cfg.ConfigureEndpoints(context);
     });
 });
